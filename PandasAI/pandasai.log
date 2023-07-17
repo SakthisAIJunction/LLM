@@ -1,0 +1,200 @@
+2023-07-15 22:42:43 [INFO] Question: what is the average age
+2023-07-15 22:42:43 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:42:43 [INFO] Prompt ID: bac201eb-cc59-47c8-9f53-c67cb9f5df2c
+2023-07-15 22:42:44 [INFO] 
+                        Code generated:
+                        ```
+                        df['age'].mean()
+                        ```
+                    
+2023-07-15 22:42:44 [INFO] 
+Code running:
+```
+df['age'].mean()
+```
+2023-07-15 22:42:44 [INFO] Answer: 29.69911764705882
+2023-07-15 22:42:44 [INFO] Executed in: 1.276585340499878s
+2023-07-15 22:44:08 [INFO] Question: how many rows above the age 50?
+2023-07-15 22:44:08 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:44:08 [INFO] Prompt ID: 79260323-250a-4bfa-a5b7-ed688ea6effb
+2023-07-15 22:44:09 [INFO] 
+                        Code generated:
+                        ```
+                        df[df['age'] > 50].shape[0]
+                        ```
+                    
+2023-07-15 22:44:09 [INFO] 
+Code running:
+```
+df[df['age'] > 50].shape[0]
+```
+2023-07-15 22:44:09 [INFO] Answer: 64
+2023-07-15 22:44:09 [INFO] Executed in: 1.4962360858917236s
+2023-07-15 22:45:04 [INFO] Question: Get me some insights of the data
+2023-07-15 22:45:04 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:45:04 [INFO] Prompt ID: 8c0d1005-040e-4b7c-8e77-c28e697b5a87
+2023-07-15 22:45:05 [INFO] 
+                        Code generated:
+                        ```
+                        # Describe the dataframe
+df.describe()
+                        ```
+                    
+2023-07-15 22:45:05 [INFO] 
+Code running:
+```
+df.describe()
+```
+2023-07-15 22:45:06 [INFO] Answer:          survived      pclass         age       sibsp       parch        fare
+count  891.000000  891.000000  714.000000  891.000000  891.000000  891.000000
+mean     0.383838    2.308642   29.699118    0.523008    0.381594   32.204208
+std      0.486592    0.836071   14.526497    1.102743    0.806057   49.693429
+min      0.000000    1.000000    0.420000    0.000000    0.000000    0.000000
+25%      0.000000    2.000000   20.125000    0.000000    0.000000    7.910400
+50%      0.000000    3.000000   28.000000    0.000000    0.000000   14.454200
+75%      1.000000    3.000000   38.000000    1.000000    0.000000   31.000000
+max      1.000000    3.000000   80.000000    8.000000    6.000000  512.329200
+2023-07-15 22:45:06 [INFO] Executed in: 1.4267475605010986s
+2023-07-15 22:46:01 [INFO] Question: which column has missing data
+2023-07-15 22:46:01 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:46:01 [INFO] Prompt ID: 1e09b87f-a903-4a67-a139-030a072f6d84
+2023-07-15 22:48:19 [INFO] Question: Plot a histogram of the column sex.
+2023-07-15 22:48:19 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:48:19 [INFO] Prompt ID: 2cf1fc03-ef03-487f-9181-676fc6cd968a
+2023-07-15 22:48:19 [INFO] Using cached response
+2023-07-15 22:48:19 [INFO] 
+Code running:
+```
+df['sex'].hist()
+plt.xlabel('Sex')
+plt.ylabel('Count')
+plt.title('Histogram of Sex')
+plt.show()
+plt.close('all')
+```
+2023-07-15 22:49:52 [INFO] Question: 
+1. Copy the dataframe to a new variable named df_features.
+2. Do feature generation.
+3. Return df_features.
+
+2023-07-15 22:49:52 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:49:52 [INFO] Prompt ID: cd29966f-14db-4a8f-8231-2075da894440
+2023-07-15 22:49:52 [INFO] Using cached response
+2023-07-15 22:49:52 [INFO] 
+Code running:
+```
+df_features = df.copy()
+df_features['family_size'] = df_features['sibsp'] + df_features['parch'] + 1
+df_features['is_adult'] = df_features['age'].apply(lambda x: True if x >= 18 else False)
+df_features
+```
+2023-07-15 22:49:52 [INFO] Answer:      survived  pclass     sex   age  sibsp  parch     fare embarked   class    who  adult_male deck  embark_town alive  alone  family_size  is_adult
+0           0       3    male  22.0      1      0   7.2500        S   Third    man        True  NaN  Southampton    no  False            2      True
+1           1       1  female  38.0      1      0  71.2833        C   First  woman       False    C    Cherbourg   yes  False            2      True
+2           1       3  female  26.0      0      0   7.9250        S   Third  woman       False  NaN  Southampton   yes   True            1      True
+3           1       1  female  35.0      1      0  53.1000        S   First  woman       False    C  Southampton   yes  False            2      True
+4           0       3    male  35.0      0      0   8.0500        S   Third    man        True  NaN  Southampton    no   True            1      True
+..        ...     ...     ...   ...    ...    ...      ...      ...     ...    ...         ...  ...          ...   ...    ...          ...       ...
+886         0       2    male  27.0      0      0  13.0000        S  Second    man        True  NaN  Southampton    no   True            1      True
+887         1       1  female  19.0      0      0  30.0000        S   First  woman       False    B  Southampton   yes   True            1      True
+888         0       3  female   NaN      1      2  23.4500        S   Third  woman       False  NaN  Southampton    no  False            4     False
+889         1       1    male  26.0      0      0  30.0000        C   First    man        True    C    Cherbourg   yes   True            1      True
+890         0       3    male  32.0      0      0   7.7500        Q   Third    man        True  NaN   Queenstown    no   True            1      True
+
+[891 rows x 17 columns]
+2023-07-15 22:49:52 [INFO] Executed in: 0.10970783233642578s
+2023-07-15 22:51:10 [INFO] Question: 
+1. Copy the dataframe to a new variable named df_features.
+2. Do feature generation.
+3. Return df_features.
+
+2023-07-15 22:51:10 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:51:10 [INFO] Prompt ID: 1f35f214-9ac9-4b94-a361-892dc633f4a6
+2023-07-15 22:51:10 [INFO] Using cached response
+2023-07-15 22:51:10 [INFO] 
+Code running:
+```
+df_features = df.copy()
+df_features['family_size'] = df_features['sibsp'] + df_features['parch'] + 1
+df_features['is_adult'] = df_features['age'].apply(lambda x: True if x >= 18 else False)
+df_features
+```
+2023-07-15 22:51:10 [INFO] Answer:      survived  pclass     sex   age  sibsp  parch     fare embarked   class    who  adult_male deck  embark_town alive  alone  family_size  is_adult
+0           0       3    male  22.0      1      0   7.2500        S   Third    man        True  NaN  Southampton    no  False            2      True
+1           1       1  female  38.0      1      0  71.2833        C   First  woman       False    C    Cherbourg   yes  False            2      True
+2           1       3  female  26.0      0      0   7.9250        S   Third  woman       False  NaN  Southampton   yes   True            1      True
+3           1       1  female  35.0      1      0  53.1000        S   First  woman       False    C  Southampton   yes  False            2      True
+4           0       3    male  35.0      0      0   8.0500        S   Third    man        True  NaN  Southampton    no   True            1      True
+..        ...     ...     ...   ...    ...    ...      ...      ...     ...    ...         ...  ...          ...   ...    ...          ...       ...
+886         0       2    male  27.0      0      0  13.0000        S  Second    man        True  NaN  Southampton    no   True            1      True
+887         1       1  female  19.0      0      0  30.0000        S   First  woman       False    B  Southampton   yes   True            1      True
+888         0       3  female   NaN      1      2  23.4500        S   Third  woman       False  NaN  Southampton    no  False            4     False
+889         1       1    male  26.0      0      0  30.0000        C   First    man        True    C    Cherbourg   yes   True            1      True
+890         0       3    male  32.0      0      0   7.7500        Q   Third    man        True  NaN   Queenstown    no   True            1      True
+
+[891 rows x 17 columns]
+2023-07-15 22:51:10 [INFO] Executed in: 0.0997316837310791s
+2023-07-15 22:51:10 [INFO] Question: 
+1. Copy the dataframe to a new variable named df_cleaned.
+2. Do data cleaning.
+3. Return df_cleaned.
+
+2023-07-15 22:51:10 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:51:10 [INFO] Prompt ID: 95c33425-b9e7-4bf9-8b2e-9abdb8b2c239
+2023-07-15 22:51:10 [INFO] Using cached response
+2023-07-15 22:51:10 [INFO] 
+Code running:
+```
+df_cleaned = df.copy()
+df_cleaned.dropna(inplace=True)
+df_cleaned['age'] = df_cleaned['age'].astype(int)
+df_cleaned['fare'] = df_cleaned['fare'].astype(float)
+df_cleaned
+```
+2023-07-15 22:51:10 [INFO] Answer:      survived  pclass     sex  age  sibsp  parch     fare embarked  class    who  adult_male deck  embark_town alive  alone
+1           1       1  female   38      1      0  71.2833        C  First  woman       False    C    Cherbourg   yes  False
+3           1       1  female   35      1      0  53.1000        S  First  woman       False    C  Southampton   yes  False
+6           0       1    male   54      0      0  51.8625        S  First    man        True    E  Southampton    no   True
+10          1       3  female    4      1      1  16.7000        S  Third  child       False    G  Southampton   yes  False
+11          1       1  female   58      0      0  26.5500        S  First  woman       False    C  Southampton   yes   True
+..        ...     ...     ...  ...    ...    ...      ...      ...    ...    ...         ...  ...          ...   ...    ...
+871         1       1  female   47      1      1  52.5542        S  First  woman       False    D  Southampton   yes  False
+872         0       1    male   33      0      0   5.0000        S  First    man        True    B  Southampton    no   True
+879         1       1  female   56      0      1  83.1583        C  First  woman       False    C    Cherbourg   yes  False
+887         1       1  female   19      0      0  30.0000        S  First  woman       False    B  Southampton   yes   True
+889         1       1    male   26      0      0  30.0000        C  First    man        True    C    Cherbourg   yes   True
+
+[182 rows x 15 columns]
+2023-07-15 22:51:10 [INFO] Executed in: 0.08876252174377441s
+2023-07-15 22:52:28 [INFO] Question: 
+1. Copy the dataframe to a new variable named df_cleaned.
+2. Do data cleaning.
+3. Return df_cleaned.
+
+2023-07-15 22:52:28 [INFO] Running PandasAI with openai LLM...
+2023-07-15 22:52:28 [INFO] Prompt ID: 878747c3-c9e6-4d04-9f64-faa994da1abf
+2023-07-15 22:52:28 [INFO] Using cached response
+2023-07-15 22:52:28 [INFO] 
+Code running:
+```
+df_cleaned = df.copy()
+df_cleaned.dropna(inplace=True)
+df_cleaned['age'] = df_cleaned['age'].astype(int)
+df_cleaned['fare'] = df_cleaned['fare'].astype(float)
+df_cleaned
+```
+2023-07-15 22:52:28 [INFO] Answer:      survived  pclass     sex  age  sibsp  parch     fare embarked  class    who  adult_male deck  embark_town alive  alone
+1           1       1  female   38      1      0  71.2833        C  First  woman       False    C    Cherbourg   yes  False
+3           1       1  female   35      1      0  53.1000        S  First  woman       False    C  Southampton   yes  False
+6           0       1    male   54      0      0  51.8625        S  First    man        True    E  Southampton    no   True
+10          1       3  female    4      1      1  16.7000        S  Third  child       False    G  Southampton   yes  False
+11          1       1  female   58      0      0  26.5500        S  First  woman       False    C  Southampton   yes   True
+..        ...     ...     ...  ...    ...    ...      ...      ...    ...    ...         ...  ...          ...   ...    ...
+871         1       1  female   47      1      1  52.5542        S  First  woman       False    D  Southampton   yes  False
+872         0       1    male   33      0      0   5.0000        S  First    man        True    B  Southampton    no   True
+879         1       1  female   56      0      1  83.1583        C  First  woman       False    C    Cherbourg   yes  False
+887         1       1  female   19      0      0  30.0000        S  First  woman       False    B  Southampton   yes   True
+889         1       1    male   26      0      0  30.0000        C  First    man        True    C    Cherbourg   yes   True
+
+[182 rows x 15 columns]
+2023-07-15 22:52:28 [INFO] Executed in: 0.12366843223571777s
